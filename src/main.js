@@ -9,6 +9,7 @@
 
 // ID Variable creation
 let tempString;
+let resultTemp;
 let fahrenheitToCelsiusButton;
 let fahrenheitToKelvinButton;
 let celsiusToFahrenheitButton;
@@ -164,6 +165,43 @@ let screen = Container.template((data) =>
  			tempString = Label(data, {
 				string: " " + temperature.temp + " ",
 				left: 18,
+				bottom: 0,
+				style: new Style ({color:"black", size:30}),
+				skin: new Skin({
+					fill: "white",
+					borders:{
+						top: 2,
+						bottom: 2,
+						right: 2,
+						left: 2
+					},
+					stroke: "#000000"
+				}),
+				Behavior: class extends Behavior {
+					onCreate(label) {
+						
+					}
+					onTouchBegan(label) {
+						label.skin = new Skin("#808080");
+					}
+					onTouchEnded(label) {
+						label.skin = new Skin({
+							fill: "white",
+							borders:{
+								top: 2,
+								bottom: 2,
+								right: 2,
+								left: 2
+							},
+							stroke: "#000000"
+						}),
+					}
+				},				
+			}),
+			
+			// Result Temperature
+ 			resultTemp = Label(data, {
+				string: "",
 				bottom: 0,
 				style: new Style ({color:"black", size:30}),
 				skin: new Skin({
@@ -366,20 +404,27 @@ let buttonColor = {
 }
 
 function converter(conversionType) {
+	let convertedString = "";
 	switch (conversionType) {
 		case fahToCel:
+			convertedString = ((parse.float(temperature.temp) - 32) * (5/9)) + " C"
 			break;
 		case fahToKel:
+			convertedString = ((parse.float(temperature.temp) + 459.67) * (5/9)) + " K"
 			break;
 		case celToFah:
+			convertedString = ((parse.float(temperature.temp) * 9/5) + 32) + " F"
 			break;
 		case celToKel:
+			convertedString = (parse.float(temperature.temp) + 273.15) + " K"
 			break;
 		case KelToFah:
+			convertedString = ((parse.float(temperature.temp) * 9/5) - 459.67) + " F"
 			break;
 		default:
-	
+			convertedString = (parse.float(temperature.temp) - 273.15) + " C"
 	}
+	return convertedString;
 }
 
 let temperature = {
