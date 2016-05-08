@@ -16,6 +16,7 @@ let celsiusToFahrenheitButton;
 let celsiusToKelvinButton;
 let kelvinToFahrenheitButton;
 let kelvinToCelsiusButton;
+let conversionSelection;
 
 let screen = Container.template((data) => 
 {
@@ -36,6 +37,7 @@ let screen = Container.template((data) =>
 						
 					}
 					onTouchEnded(label) {
+						conversionSelection = "fahToCel";
 						fahrenheitToCelsiusButton.skin = buttonColor.onClicked;
 						fahrenheitToKelvinButton.skin = buttonColor.standard;
 						celsiusToFahrenheitButton.skin = buttonColor.standard;
@@ -59,6 +61,7 @@ let screen = Container.template((data) =>
 						
 					}
 					onTouchEnded(label) {
+						conversionSelection = "fahToKel";
 						fahrenheitToCelsiusButton.skin = buttonColor.standard;
 						fahrenheitToKelvinButton.skin = buttonColor.onClicked;
 						celsiusToFahrenheitButton.skin = buttonColor.standard;
@@ -82,6 +85,7 @@ let screen = Container.template((data) =>
 						
 					}
 					onTouchEnded(label) {
+						conversionSelection = "celToFah";
 						fahrenheitToCelsiusButton.skin = buttonColor.standard;
 						fahrenheitToKelvinButton.skin = buttonColor.standard;
 						celsiusToFahrenheitButton.skin = buttonColor.onClicked;
@@ -105,6 +109,7 @@ let screen = Container.template((data) =>
 						
 					}
 					onTouchEnded(label) {
+						conversionSelection = "kelToFah";
 						fahrenheitToCelsiusButton.skin = buttonColor.standard;
 						fahrenheitToKelvinButton.skin = buttonColor.standard;
 						celsiusToFahrenheitButton.skin = buttonColor.standard;
@@ -128,6 +133,7 @@ let screen = Container.template((data) =>
 						
 					}
 					onTouchEnded(label) {
+						conversionSelection = "kelToCel";
 						fahrenheitToCelsiusButton.skin = buttonColor.standard;
 						fahrenheitToKelvinButton.skin = buttonColor.standard;
 						celsiusToFahrenheitButton.skin = buttonColor.standard;
@@ -151,6 +157,7 @@ let screen = Container.template((data) =>
 						
 					}
 					onTouchEnded(label) {
+						conversionSelection = "celToKel";
 						fahrenheitToCelsiusButton.skin = buttonColor.standard;
 						fahrenheitToKelvinButton.skin = buttonColor.standard;
 						celsiusToFahrenheitButton.skin = buttonColor.standard;
@@ -362,6 +369,7 @@ let screen = Container.template((data) =>
 						label.skin = new Skin("#808080");
 					}
 					onTouchEnded(label) {
+						converter(conversionSelection);
 						label.skin = new Skin({
 						fill: "#404040",
 						borders:{
@@ -406,25 +414,28 @@ let buttonColor = {
 function converter(conversionType) {
 	let convertedString = "";
 	switch (conversionType) {
-		case fahToCel:
-			convertedString = ((parse.float(temperature.temp) - 32) * (5/9)) + " C"
+		case "fahToCel":
+			convertedString = ((parseFloat(temperature.temp) - 32) * (5/9)) + " C"
 			break;
-		case fahToKel:
-			convertedString = ((parse.float(temperature.temp) + 459.67) * (5/9)) + " K"
+		case "fahToKel":
+			convertedString = ((parseFloat(temperature.temp) + 459.67) * (5/9)) + " K"
 			break;
-		case celToFah:
-			convertedString = ((parse.float(temperature.temp) * 9/5) + 32) + " F"
+		case "celToFah":
+			convertedString = ((parseFloat(temperature.temp) * 9/5) + 32) + " F"
 			break;
-		case celToKel:
-			convertedString = (parse.float(temperature.temp) + 273.15) + " K"
+		case "celToKel":
+			convertedString = (parseFloat(temperature.temp) + 273.15) + " K"
 			break;
-		case KelToFah:
-			convertedString = ((parse.float(temperature.temp) * 9/5) - 459.67) + " F"
+		case "kelToFah":
+			convertedString = ((parseFloat(temperature.temp) * 9/5) - 459.67) + " F"
+			break;
+		case "kelToCel":
+			convertedString = (parseFloat(temperature.temp) - 273.15) + " C"
 			break;
 		default:
-			convertedString = (parse.float(temperature.temp) - 273.15) + " C"
+			convertedString = "N/A";
 	}
-	return convertedString;
+	resultTemp.string = convertedString;
 }
 
 let temperature = {
