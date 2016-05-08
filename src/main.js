@@ -11,16 +11,155 @@
 let tempString;
 let fahrenheitToCelsiusButton;
 let fahrenheitToKelvinButton;
-let CelsiusToFahrenheitButton;
-let CelsiusToKelvinButton;
-let KelvinToFahrenheitButton;
-let KelvinToCelsiusButton;
+let celsiusToFahrenheitButton;
+let celsiusToKelvinButton;
+let kelvinToFahrenheitButton;
+let kelvinToCelsiusButton;
 
 let screen = Container.template((data) => 
 {
 	return { left: 0, right: 0, top: 0, bottom: 0, 
 		skin: new Skin("#d9d9d9"),
 		contents: [
+		
+			// Fahrenheit To Celsius Button
+			fahrenheitToCelsiusButton = Label(data, {
+				string: " Fahrenheit To Celsius",
+				left: 0,
+				top: 50,
+				active: true,
+				style: new Style ({color:"white", size:17}),
+				skin: buttonColor.standard,
+				Behavior: class extends Behavior {
+					onCreate(label) {
+						
+					}
+					onTouchEnded(label) {
+						fahrenheitToCelsiusButton.skin = buttonColor.onClicked;
+						fahrenheitToKelvinButton.skin = buttonColor.standard;
+						celsiusToFahrenheitButton.skin = buttonColor.standard;
+						celsiusToKelvinButton.skin = buttonColor.standard;
+						kelvinToFahrenheitButton.skin = buttonColor.standard;
+						kelvinToCelsiusButton.skin = buttonColor.standard;
+					}
+				},				
+			}),
+			
+			// Fahrenheit To Kelvin Button
+			fahrenheitToKelvinButton = Label(data, {
+				string: " Fahrenheit To Kelvin  ",
+				left: 0,
+				top: 90,
+				active: true,
+				style: new Style ({color:"white", size:17}),
+				skin: buttonColor.standard,
+				Behavior: class extends Behavior {
+					onCreate(label) {
+						
+					}
+					onTouchEnded(label) {
+						fahrenheitToCelsiusButton.skin = buttonColor.standard;
+						fahrenheitToKelvinButton.skin = buttonColor.onClicked;
+						celsiusToFahrenheitButton.skin = buttonColor.standard;
+						celsiusToKelvinButton.skin = buttonColor.standard;
+						kelvinToFahrenheitButton.skin = buttonColor.standard;
+						kelvinToCelsiusButton.skin = buttonColor.standard;
+					}
+				},				
+			}),
+			
+			// Celsius To Fahrenheit Button
+			celsiusToFahrenheitButton = Label(data, {
+				string: " Celsius To Fahrenheit",
+				left: 0,
+				top: 130,
+				active: true,
+				style: new Style ({color:"white", size:17}),
+				skin: buttonColor.standard,
+				Behavior: class extends Behavior {
+					onCreate(label) {
+						
+					}
+					onTouchEnded(label) {
+						fahrenheitToCelsiusButton.skin = buttonColor.standard;
+						fahrenheitToKelvinButton.skin = buttonColor.standard;
+						celsiusToFahrenheitButton.skin = buttonColor.onClicked;
+						celsiusToKelvinButton.skin = buttonColor.standard;
+						kelvinToFahrenheitButton.skin = buttonColor.standard;
+						kelvinToCelsiusButton.skin = buttonColor.standard;
+					}
+				},				
+			}),
+			
+			// Kelvin To Fahrenheit Button
+			kelvinToFahrenheitButton = Label(data, {
+				string: " Kelvin To Fahrenheit",
+				right: 0,
+				top: 50,
+				active: true,
+				style: new Style ({color:"white", size:17}),
+				skin: buttonColor.standard,
+				Behavior: class extends Behavior {
+					onCreate(label) {
+						
+					}
+					onTouchEnded(label) {
+						fahrenheitToCelsiusButton.skin = buttonColor.standard;
+						fahrenheitToKelvinButton.skin = buttonColor.standard;
+						celsiusToFahrenheitButton.skin = buttonColor.standard;
+						celsiusToKelvinButton.skin = buttonColor.standard;
+						kelvinToFahrenheitButton.skin = buttonColor.onClicked;
+						kelvinToCelsiusButton.skin = buttonColor.standard;
+					}
+				},				
+			}),
+			
+			// Kelvin To Celsius Button
+			kelvinToCelsiusButton = Label(data, {
+				string: " Kelvin To Celsius     ",
+				right: 0,
+				top: 90,
+				active: true,
+				style: new Style ({color:"white", size:17}),
+								skin: buttonColor.standard,
+				Behavior: class extends Behavior {
+					onCreate(label) {
+						
+					}
+					onTouchEnded(label) {
+						fahrenheitToCelsiusButton.skin = buttonColor.standard;
+						fahrenheitToKelvinButton.skin = buttonColor.standard;
+						celsiusToFahrenheitButton.skin = buttonColor.standard;
+						celsiusToKelvinButton.skin = buttonColor.standard;
+						kelvinToFahrenheitButton.skin = buttonColor.standard;
+						kelvinToCelsiusButton.skin = buttonColor.onClicked;
+					}
+				},				
+			}),
+			
+			// Celsius To Kelvin Button
+			celsiusToKelvinButton = Label(data, {
+				string: " Celsius To Kelvin     ",
+				right: 0,
+				top: 130,
+				active: true,
+				style: new Style ({color:"white", size:17}),
+				skin: buttonColor.standard,
+				Behavior: class extends Behavior {
+					onCreate(label) {
+						
+					}
+					onTouchEnded(label) {
+						fahrenheitToCelsiusButton.skin = buttonColor.standard;
+						fahrenheitToKelvinButton.skin = buttonColor.standard;
+						celsiusToFahrenheitButton.skin = buttonColor.standard;
+						celsiusToKelvinButton.skin = buttonColor.onClicked;
+						kelvinToFahrenheitButton.skin = buttonColor.standard;
+						kelvinToCelsiusButton.skin = buttonColor.standard;
+					}
+				},				
+			}),
+			
 			// Temperature String
  			tempString = Label(data, {
 				string: " " + temperature.temp + " ",
@@ -201,6 +340,47 @@ let screen = Container.template((data) =>
 		] 
 	}
 });
+
+let buttonColor = {
+	standard: new Skin({
+		fill: "#404040",
+		borders:{
+			top: 2,
+			bottom: 2,
+			right: 2,
+			left: 2
+		},
+		stroke: "#000000"
+	}),
+	
+	onClicked: new Skin({
+		fill: "#808080",
+		borders:{
+			top: 2,
+			bottom: 2,
+			right: 2,
+			left: 2
+		},
+		stroke: "#000000"
+	})
+}
+
+function converter(conversionType) {
+	switch (conversionType) {
+		case fahToCel:
+			break;
+		case fahToKel:
+			break;
+		case celToFah:
+			break;
+		case celToKel:
+			break;
+		case KelToFah:
+			break;
+		default:
+	
+	}
+}
 
 let temperature = {
 	temp: 100,
