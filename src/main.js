@@ -26,16 +26,13 @@ let screen = Container.template((data) =>
 		
 			// Fahrenheit To Celsius Button
 			fahrenheitToCelsiusButton = Label(data, {
-				string: " Fahrenheit To Celsius",
-				left: 0,
+				string: "  \xB0F to \xB0C  ",
+				left: 20,
 				top: 50,
 				active: true,
-				style: new Style ({color:"white", size:17}),
+				style: new Style ({color:"white", size:23}),
 				skin: buttonColor.standard,
 				Behavior: class extends Behavior {
-					onCreate(label) {
-						
-					}
 					onTouchEnded(label) {
 						conversionSelection = "fahToCel";
 						fahrenheitToCelsiusButton.skin = buttonColor.onClicked;
@@ -50,16 +47,13 @@ let screen = Container.template((data) =>
 			
 			// Fahrenheit To Kelvin Button
 			fahrenheitToKelvinButton = Label(data, {
-				string: " Fahrenheit To Kelvin  ",
-				left: 0,
+				string: "  \xB0F to \xB0K  ",
+				left: 20,
 				top: 90,
 				active: true,
-				style: new Style ({color:"white", size:17}),
+				style: new Style ({color:"white", size:23}),
 				skin: buttonColor.standard,
 				Behavior: class extends Behavior {
-					onCreate(label) {
-						
-					}
 					onTouchEnded(label) {
 						conversionSelection = "fahToKel";
 						fahrenheitToCelsiusButton.skin = buttonColor.standard;
@@ -74,16 +68,13 @@ let screen = Container.template((data) =>
 			
 			// Celsius To Fahrenheit Button
 			celsiusToFahrenheitButton = Label(data, {
-				string: " Celsius To Fahrenheit",
-				left: 0,
+				string: "  \xB0C to \xB0F  ",
+				left: 20,
 				top: 130,
 				active: true,
-				style: new Style ({color:"white", size:17}),
+				style: new Style ({color:"white", size:23}),
 				skin: buttonColor.standard,
 				Behavior: class extends Behavior {
-					onCreate(label) {
-						
-					}
 					onTouchEnded(label) {
 						conversionSelection = "celToFah";
 						fahrenheitToCelsiusButton.skin = buttonColor.standard;
@@ -98,16 +89,13 @@ let screen = Container.template((data) =>
 			
 			// Kelvin To Fahrenheit Button
 			kelvinToFahrenheitButton = Label(data, {
-				string: " Kelvin To Fahrenheit",
-				right: 0,
+				string: "  \xB0K to \xB0F  ",
+				right: 20,
 				top: 50,
 				active: true,
-				style: new Style ({color:"white", size:17}),
+				style: new Style ({color:"white", size:23}),
 				skin: buttonColor.standard,
 				Behavior: class extends Behavior {
-					onCreate(label) {
-						
-					}
 					onTouchEnded(label) {
 						conversionSelection = "kelToFah";
 						fahrenheitToCelsiusButton.skin = buttonColor.standard;
@@ -122,16 +110,13 @@ let screen = Container.template((data) =>
 			
 			// Kelvin To Celsius Button
 			kelvinToCelsiusButton = Label(data, {
-				string: " Kelvin To Celsius     ",
-				right: 0,
+				string: "  \xB0K to \xB0C  ",
+				right: 20,
 				top: 90,
 				active: true,
-				style: new Style ({color:"white", size:17}),
+				style: new Style ({color:"white", size:23}),
 								skin: buttonColor.standard,
 				Behavior: class extends Behavior {
-					onCreate(label) {
-						
-					}
 					onTouchEnded(label) {
 						conversionSelection = "kelToCel";
 						fahrenheitToCelsiusButton.skin = buttonColor.standard;
@@ -146,16 +131,13 @@ let screen = Container.template((data) =>
 			
 			// Celsius To Kelvin Button
 			celsiusToKelvinButton = Label(data, {
-				string: " Celsius To Kelvin     ",
-				right: 0,
+				string: "  \xB0C to \xB0K  ",
+				right: 20,
 				top: 130,
 				active: true,
-				style: new Style ({color:"white", size:17}),
+				style: new Style ({color:"white", size:23}),
 				skin: buttonColor.standard,
 				Behavior: class extends Behavior {
-					onCreate(label) {
-						
-					}
 					onTouchEnded(label) {
 						conversionSelection = "celToKel";
 						fahrenheitToCelsiusButton.skin = buttonColor.standard;
@@ -185,9 +167,6 @@ let screen = Container.template((data) =>
 					stroke: "#000000"
 				}),
 				Behavior: class extends Behavior {
-					onCreate(label) {
-						
-					}
 					onTouchBegan(label) {
 						label.skin = new Skin("#808080");
 					}
@@ -209,7 +188,7 @@ let screen = Container.template((data) =>
 			// Result Temperature
  			resultTemp = Label(data, {
 				string: "",
-				bottom: 0,
+				bottom: 50,
 				style: new Style ({color:"black", size:30}),
 				skin: new Skin({
 					fill: "white",
@@ -222,9 +201,6 @@ let screen = Container.template((data) =>
 					stroke: "#000000"
 				}),
 				Behavior: class extends Behavior {
-					onCreate(label) {
-						
-					}
 					onTouchBegan(label) {
 						label.skin = new Skin("#808080");
 					}
@@ -249,7 +225,7 @@ let screen = Container.template((data) =>
 				top: 0,
 				left: 0,
 				right: 0, 
-				style: new Style ({color:"white", size:30}), 
+				style: new Style ({font: "bold", color:"white", size:30}), 
 				skin: new Skin({
 					fill: "#404040",
 					borders:{
@@ -261,6 +237,7 @@ let screen = Container.template((data) =>
 					stroke: "#000000"
 				}) 
 			}),
+			
 			// Temperature decrementer
 			Label(data, {
 				string: " - ",
@@ -287,7 +264,10 @@ let screen = Container.template((data) =>
 					}
 					onTouchEnded(label) {
 						temperature.temp--;
-						tempString.string = " " + temperature.temp + " ";
+						if (temperature.temp < 100)
+							tempString.string = "  " + temperature.temp + "  "
+						else
+							tempString.string = " " + temperature.temp + " ";
 						label.skin = new Skin({
 							fill: "#404040",
 							borders:{
@@ -328,7 +308,10 @@ let screen = Container.template((data) =>
 					}
 					onTouchEnded(label) {
 						temperature.temp++;
-						tempString.string = " " + temperature.temp + " ";
+						if (temperature.temp < 100)
+							tempString.string = "  " + temperature.temp + "  "
+						else
+							tempString.string = " " + temperature.temp + " ";
 						label.skin = new Skin({
 							fill: "#404040",
 							borders:{
@@ -345,12 +328,12 @@ let screen = Container.template((data) =>
 			
 			// Conversion button
 			Label(data, {
-				string: "Convert",
+				string: " Convert ",
 				active: true, 
 				bottom: 2,
 				right: 2, 
 				active: true,
-				style: new Style ({color:"white", size:30}),
+				style: new Style ({font: "bold", color:"white", size:30}),
 				skin: new Skin({
 					fill: "#404040",
 					borders:{
@@ -407,6 +390,12 @@ let buttonColor = {
 			right: 2,
 			left: 2
 		},
+		margins: {
+			top: 3,
+			bottom: 3,
+			left: 3,
+			right: 3,
+		},
 		stroke: "#000000"
 	})
 }
@@ -415,27 +404,27 @@ function converter(conversionType) {
 	let convertedString = "";
 	switch (conversionType) {
 		case "fahToCel":
-			convertedString = ((parseFloat(temperature.temp) - 32) * (5/9)) + " C"
+			convertedString = ((parseFloat(temperature.temp) - 32) * (5/9)).toFixed(2) + " \xB0C"
 			break;
 		case "fahToKel":
-			convertedString = ((parseFloat(temperature.temp) + 459.67) * (5/9)) + " K"
+			convertedString = ((parseFloat(temperature.temp) + 459.67) * (5/9)).toFixed(2) + " \xB0K"
 			break;
 		case "celToFah":
-			convertedString = ((parseFloat(temperature.temp) * 9/5) + 32) + " F"
+			convertedString = ((parseFloat(temperature.temp) * 9/5) + 32).toFixed(2) + " \xB0F"
 			break;
 		case "celToKel":
-			convertedString = (parseFloat(temperature.temp) + 273.15) + " K"
+			convertedString = (parseFloat(temperature.temp) + 273.15).toFixed(2) + " \xB0K"
 			break;
 		case "kelToFah":
-			convertedString = ((parseFloat(temperature.temp) * 9/5) - 459.67) + " F"
+			convertedString = ((parseFloat(temperature.temp) * 9/5) - 459.67).toFixed(2) + " \xB0F"
 			break;
 		case "kelToCel":
-			convertedString = (parseFloat(temperature.temp) - 273.15) + " C"
+			convertedString = (parseFloat(temperature.temp) - 273.15).toFixed(2) + " \xB0C"
 			break;
 		default:
 			convertedString = "N/A";
 	}
-	resultTemp.string = convertedString;
+	resultTemp.string = " " + convertedString + " ";
 }
 
 let temperature = {
